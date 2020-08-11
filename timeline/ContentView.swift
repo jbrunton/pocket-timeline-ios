@@ -8,20 +8,28 @@
 
 import SwiftUI
 
+struct TimelinesView : View {
+    @ObservedObject var fetcher = TimelineFetcher()
+    
+    var body: some View {
+        List(fetcher.timelines) { timeline in
+            Image(systemName: "photo")
+            VStack(alignment: .leading) {
+                Text(timeline.title)
+                Text(timeline.description)
+                    .font(.subheadline)
+            }
+        }
+    }
+}
+
 struct ContentView: View {
     @State private var selection = 0
     @ObservedObject var fetcher = TimelineFetcher()
  
     var body: some View {
         TabView(selection: $selection){
-            List(fetcher.timelines) { timeline in
-                Image(systemName: "photo")
-                VStack(alignment: .leading) {
-                    Text(timeline.title)
-                    Text(timeline.description)
-                        .font(.subheadline)
-                }
-            }
+            TimelinesView()
                 .font(.title)
                 .tabItem {
                     VStack {
