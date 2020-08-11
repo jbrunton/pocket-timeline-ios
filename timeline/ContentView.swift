@@ -10,14 +10,15 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selection = 0
+    @ObservedObject var fetcher = TimelineFetcher()
  
     var body: some View {
         TabView(selection: $selection){
-            List(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
+            List(fetcher.timelines) { timeline in
                 Image(systemName: "photo")
                 VStack(alignment: .leading) {
-                    Text("World War 2")
-                    Text("Events of the Second World War")
+                    Text(timeline.title)
+                    Text(timeline.description)
                         .font(.subheadline)
                 }
             }
