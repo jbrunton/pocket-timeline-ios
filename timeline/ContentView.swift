@@ -13,7 +13,14 @@ struct ContentView: View {
  
     var body: some View {
         TabView(selection: $selection){
-            Text("First View")
+            List(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
+                Image(systemName: "photo")
+                VStack(alignment: .leading) {
+                    Text("World War 2")
+                    Text("Events of the Second World War")
+                        .font(.subheadline)
+                }
+            }
                 .font(.title)
                 .tabItem {
                     VStack {
